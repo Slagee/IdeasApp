@@ -1,4 +1,6 @@
-﻿namespace IdeaAppUI;
+﻿using IdeaAppLibrary.DataAccess.impl;
+
+namespace IdeaAppUI;
 
 public static class RegisterServices
 {
@@ -8,5 +10,11 @@ public static class RegisterServices
         builder.Services.AddRazorPages();
         builder.Services.AddServerSideBlazor();
         builder.Services.AddMemoryCache();
+
+        builder.Services.AddSingleton<IDbConnection, DbConnection>();
+        builder.Services.AddTransient<ICategoryData, MongoCategoryData>();
+        builder.Services.AddTransient<IStatusData, MongoStatusData>();
+        builder.Services.AddTransient<IIdeaData, MongoIdeaData>();
+        builder.Services.AddTransient<IUserData, MongoUserData>();
     }
 }
